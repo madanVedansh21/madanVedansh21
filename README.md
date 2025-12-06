@@ -39,7 +39,7 @@ and learning by building.
 ---
 <!-- --------------------------------- TECH STACK (UPGRADED) --------------------------------- -->
 <p align="center">
-  <img src="https://profile-counter.glitch.me/madanVedansh21/count.svg" />
+  <img src="https://komarev.com/ghpvc/?username=madanVedansh21&label=Profile+Views&color=blue&style=for-the-badge" />
 </p>
 
 # 💻 Tech Stack  
