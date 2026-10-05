@@ -141,7 +141,7 @@ def build_info_col(theme, rx, start_y):
 
     ln(f'<tspan {cc}>. </tspan><tspan {kc}>Work</tspan>'
        f'<tspan {cc}> ................. </tspan>'
-       f'<tspan {vc}>Full Stack Intern @ QuickIntell</tspan>')
+       f'<tspan {vc}>Ex-Full Stack Intern @ QuickIntell</tspan>')
 
     ln(f'<tspan {cc}>. </tspan><tspan {kc}>IDE</tspan>'
        f'<tspan {cc}> .................. </tspan>'
