@@ -129,7 +129,7 @@ def build_info_col(theme, rx, start_y):
 
     ln(f'<tspan {cc}>. </tspan><tspan {kc}>Uptime</tspan>'
        f'<tspan {cc} id="age_data_dots"> ................ </tspan>'
-       f'<tspan {vc} id="age_data">20 years, 1 month, 29 days</tspan>')
+       f'<tspan {vc} id="age_data">20 years, 4 months, 15 days</tspan>')
 
     ln(f'<tspan {cc}>. </tspan><tspan {kc}>Host</tspan>'
        f'<tspan {cc}> ................. </tspan>'

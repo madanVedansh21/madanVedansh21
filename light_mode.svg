@@ -47,7 +47,7 @@ text, tspan { white-space: pre; }
 <text font-family="ConsolasFallback,Consolas,'Courier New',monospace" font-size="14px" xml:space="preserve">
   <tspan x="531" y="28"><tspan fill="#0969da">vedansh@madan</tspan><tspan fill="#8c959f"> --------------------------------</tspan></tspan>
   <tspan x="531" y="46"><tspan fill="#8c959f">. </tspan><tspan fill="#953800">OS</tspan><tspan fill="#8c959f"> ................... </tspan><tspan fill="#0550ae">Windows 11, Linux, Android</tspan></tspan>
-  <tspan x="531" y="64"><tspan fill="#8c959f">. </tspan><tspan fill="#953800">Uptime</tspan><tspan fill="#8c959f" id="age_data_dots"> ................ </tspan><tspan fill="#0550ae" id="age_data">21 years, 1 month, 28 days</tspan></tspan>
+  <tspan x="531" y="64"><tspan fill="#8c959f">. </tspan><tspan fill="#953800">Uptime</tspan><tspan fill="#8c959f" id="age_data_dots"> ................ </tspan><tspan fill="#0550ae" id="age_data">20 years, 4 months, 15 days</tspan></tspan>
   <tspan x="531" y="82"><tspan fill="#8c959f">. </tspan><tspan fill="#953800">Host</tspan><tspan fill="#8c959f"> ................. </tspan><tspan fill="#0550ae">IIIT Nagpur — CSE (2024–2028)</tspan></tspan>
   <tspan x="531" y="100"><tspan fill="#8c959f">. </tspan><tspan fill="#953800">Role</tspan><tspan fill="#8c959f"> ................. </tspan><tspan fill="#0550ae">Full-Stack Dev · MERN · AI</tspan></tspan>
   <tspan x="531" y="118"><tspan fill="#8c959f">. </tspan><tspan fill="#953800">Work</tspan><tspan fill="#8c959f"> ................. </tspan><tspan fill="#0550ae">Full Stack Intern @ QuickIntell</tspan></tspan>

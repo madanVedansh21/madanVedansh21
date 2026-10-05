@@ -23,8 +23,8 @@ HEADERS   = {'authorization': 'token ' + os.environ['ACCESS_TOKEN']}
 USER_NAME = os.environ['USER_NAME']   # 'madanVedansh21'
 
 # ── Birthday (for Uptime field) ───────────────────────────────────────────────
-# Vedansh Madan — DOB: 7 August 2005
-BIRTHDAY  = datetime.datetime(2005, 8, 7)
+# Vedansh Madan — DOB: 21 May 2006
+BIRTHDAY  = datetime.datetime(2006, 5, 21)
 
 # ── Query tracking ────────────────────────────────────────────────────────────
 QUERY_COUNT = {
