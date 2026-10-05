@@ -1,7 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<svg xmlns="http://www.w3.org/2000/svg"
-     xmlns:xlink="http://www.w3.org/1999/xlink"
-     width="1085px" height="520px">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1085px" height="520px">
 <style>
 @font-face {
   src: local('Consolas'), local('Consolas Bold');
@@ -49,7 +47,7 @@ text, tspan { white-space: pre; }
 <text font-family="'Courier New',Courier,monospace" font-size="12px" xml:space="preserve">
   <tspan x="640" y="25"><tspan fill="#58a6ff">vedansh@madan</tspan><tspan fill="#616e7f"> --------------------------------</tspan></tspan>
   <tspan x="640" y="40"><tspan fill="#616e7f">. </tspan><tspan fill="#ffa657">OS</tspan><tspan fill="#616e7f"> ................... </tspan><tspan fill="#a5d6ff">Windows 11, Linux, Android</tspan></tspan>
-  <tspan x="640" y="55"><tspan fill="#616e7f">. </tspan><tspan fill="#ffa657">Uptime</tspan><tspan fill="#616e7f" id="age_data_dots"> ................ </tspan><tspan fill="#a5d6ff" id="age_data">20 years, 1 month, 29 days</tspan></tspan>
+  <tspan x="640" y="55"><tspan fill="#616e7f">. </tspan><tspan fill="#ffa657">Uptime</tspan><tspan fill="#616e7f" id="age_data_dots"> ................ </tspan><tspan fill="#a5d6ff" id="age_data">21 years, 1 month, 28 days</tspan></tspan>
   <tspan x="640" y="70"><tspan fill="#616e7f">. </tspan><tspan fill="#ffa657">Host</tspan><tspan fill="#616e7f"> ................. </tspan><tspan fill="#a5d6ff">IIIT Nagpur — CSE (2024–2028)</tspan></tspan>
   <tspan x="640" y="85"><tspan fill="#616e7f">. </tspan><tspan fill="#ffa657">Role</tspan><tspan fill="#616e7f"> ................. </tspan><tspan fill="#a5d6ff">Full-Stack Dev · MERN · AI</tspan></tspan>
   <tspan x="640" y="100"><tspan fill="#616e7f">. </tspan><tspan fill="#ffa657">Work</tspan><tspan fill="#616e7f"> ................. </tspan><tspan fill="#a5d6ff">Full Stack Intern @ QuickIntell</tspan></tspan>
@@ -69,8 +67,8 @@ text, tspan { white-space: pre; }
   <tspan x="640" y="310"><tspan fill="#616e7f">. </tspan><tspan fill="#ffa657">GitHub</tspan><tspan fill="#616e7f"> .............. </tspan><tspan fill="#a5d6ff">madanVedansh21</tspan></tspan>
   <tspan x="640" y="325"> </tspan>
   <tspan x="640" y="340"><tspan fill="#58a6ff">- GitHub Stats </tspan><tspan fill="#616e7f">---------------------</tspan></tspan>
-  <tspan x="640" y="355"><tspan fill="#616e7f">. </tspan><tspan fill="#ffa657">Repos</tspan><tspan fill="#616e7f" id="repo_data_dots"> .... </tspan><tspan fill="#a5d6ff" id="repo_data">0</tspan><tspan fill="#616e7f"> {</tspan><tspan fill="#ffa657">Contrib</tspan><tspan fill="#616e7f">: </tspan><tspan fill="#a5d6ff" id="contrib_data">0</tspan><tspan fill="#616e7f">}</tspan><tspan fill="#616e7f"> | </tspan><tspan fill="#ffa657">Stars</tspan><tspan fill="#616e7f" id="star_data_dots"> .. </tspan><tspan fill="#a5d6ff" id="star_data">0</tspan></tspan>
-  <tspan x="640" y="370"><tspan fill="#616e7f">. </tspan><tspan fill="#ffa657">Commits</tspan><tspan fill="#616e7f" id="commit_data_dots"> .......... </tspan><tspan fill="#a5d6ff" id="commit_data">0</tspan><tspan fill="#616e7f"> | </tspan><tspan fill="#ffa657">Followers</tspan><tspan fill="#616e7f" id="follower_data_dots"> .... </tspan><tspan fill="#a5d6ff" id="follower_data">0</tspan></tspan>
-  <tspan x="640" y="385"><tspan fill="#616e7f">. </tspan><tspan fill="#ffa657">Lines of Code</tspan><tspan fill="#616e7f" id="loc_data_dots"> ........ </tspan><tspan fill="#a5d6ff" id="loc_data">0</tspan><tspan fill="#616e7f"> ( </tspan><tspan fill="#3fb950" id="loc_add">0</tspan><tspan fill="#3fb950">++</tspan><tspan fill="#616e7f">, </tspan><tspan id="loc_del_dots"> </tspan><tspan fill="#f85149" id="loc_del">0</tspan><tspan fill="#f85149">--</tspan><tspan fill="#616e7f"> )</tspan></tspan>
+  <tspan x="640" y="355"><tspan fill="#616e7f">. </tspan><tspan fill="#ffa657">Repos</tspan><tspan fill="#616e7f" id="repo_data_dots"> .... </tspan><tspan fill="#a5d6ff" id="repo_data">47</tspan><tspan fill="#616e7f"> {</tspan><tspan fill="#ffa657">Contrib</tspan><tspan fill="#616e7f">: </tspan><tspan fill="#a5d6ff" id="contrib_data">80</tspan><tspan fill="#616e7f">}</tspan><tspan fill="#616e7f"> | </tspan><tspan fill="#ffa657">Stars</tspan><tspan fill="#616e7f" id="star_data_dots"> ............. </tspan><tspan fill="#a5d6ff" id="star_data">5</tspan></tspan>
+  <tspan x="640" y="370"><tspan fill="#616e7f">. </tspan><tspan fill="#ffa657">Commits</tspan><tspan fill="#616e7f" id="commit_data_dots"> ............... </tspan><tspan fill="#a5d6ff" id="commit_data">868</tspan><tspan fill="#616e7f"> | </tspan><tspan fill="#ffa657">Followers</tspan><tspan fill="#616e7f" id="follower_data_dots"> ........ </tspan><tspan fill="#a5d6ff" id="follower_data">16</tspan></tspan>
+  <tspan x="640" y="385"><tspan fill="#616e7f">. </tspan><tspan fill="#ffa657">Lines of Code</tspan><tspan fill="#616e7f" id="loc_data_dots"> </tspan><tspan fill="#a5d6ff" id="loc_data">1,896,550</tspan><tspan fill="#616e7f"> ( </tspan><tspan fill="#3fb950" id="loc_add">2,350,490</tspan><tspan fill="#3fb950">++</tspan><tspan fill="#616e7f">, </tspan><tspan id="loc_del_dots"> </tspan><tspan fill="#f85149" id="loc_del">453,940</tspan><tspan fill="#f85149">--</tspan><tspan fill="#616e7f"> )</tspan></tspan>
 </text>
 </svg>
