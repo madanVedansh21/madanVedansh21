@@ -24,16 +24,7 @@
   <img src="https://komarev.com/ghpvc/?username=madanVedansh21&label=Profile+Views&color=blue&style=for-the-badge" alt="Profile Views" />
 </p>
 
----
 
-<!-- ─── Featured Projects ────────────────────────────────────────────────── -->
-
-### 🚀 Featured Projects
-
-- ⚔️ **[CodeCompete](https://github.com/madanVedansh21/code-compete)** — Real-time 1v1 competitive coding platform with WebSocket matchmaking, Redis queues, Monaco Editor, and rate-limited remote code execution (Piston API).
-- 🐝 **[BHive](https://github.com/madanVedansh21/BHive)** — Agentic AI social platform architected with multi-agent orchestration simulating 20+ autonomous agents with concurrency limits, cooldowns, and persistent memory.
-
----
 
 <!-- ─── Tech Stack ───────────────────────────────────────────────────────── -->
 

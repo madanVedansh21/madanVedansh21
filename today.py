@@ -81,15 +81,26 @@ def formatter(label: str, elapsed: float, result=None, width: int = 0):
 # GitHub GraphQL helpers
 # ─────────────────────────────────────────────────────────────────────────────
 
-def simple_request(func_name: str, query: str, variables: dict):
-    resp = requests.post(
-        'https://api.github.com/graphql',
-        json={'query': query, 'variables': variables},
-        headers=HEADERS
-    )
-    if resp.status_code == 200:
-        return resp
-    raise Exception(f'{func_name} failed: {resp.status_code} {resp.text}')
+def simple_request(func_name: str, query: str, variables: dict, max_retries: int = 3):
+    for attempt in range(max_retries):
+        try:
+            resp = requests.post(
+                'https://api.github.com/graphql',
+                json={'query': query, 'variables': variables},
+                headers=HEADERS,
+                timeout=30
+            )
+            if resp.status_code == 200:
+                return resp
+            if resp.status_code in (502, 503, 504, 429) and attempt < max_retries - 1:
+                time.sleep(2 * (attempt + 1))
+                continue
+            raise Exception(f'{func_name} failed: {resp.status_code} {resp.text}')
+        except requests.RequestException as e:
+            if attempt < max_retries - 1:
+                time.sleep(2 * (attempt + 1))
+                continue
+            raise Exception(f'{func_name} network error: {e}')
 
 
 def user_getter(username: str):
@@ -147,7 +158,7 @@ def recursive_loc(owner, repo_name, data, cache_comment,
             defaultBranchRef {
                 target {
                     ... on Commit {
-                        history(first: 100, after: $cursor) {
+                        history(first: 50, after: $cursor) {
                             totalCount
                             edges {
                                 node {
@@ -163,22 +174,41 @@ def recursive_loc(owner, repo_name, data, cache_comment,
             }
         }
     }'''
-    resp = requests.post('https://api.github.com/graphql',
-                         json={'query': q, 'variables': {'repo_name': repo_name,
-                                                          'owner': owner,
-                                                          'cursor': cursor}},
-                         headers=HEADERS)
-    if resp.status_code == 200:
-        ref = resp.json()['data']['repository']['defaultBranchRef']
-        if ref is None:
-            return 0
-        return _loc_counter(owner, repo_name, data, cache_comment,
-                            ref['target']['history'],
-                            addition_total, deletion_total, my_commits)
+    resp = None
+    for attempt in range(3):
+        try:
+            resp = requests.post(
+                'https://api.github.com/graphql',
+                json={'query': q, 'variables': {'repo_name': repo_name,
+                                                 'owner': owner,
+                                                 'cursor': cursor}},
+                headers=HEADERS,
+                timeout=30
+            )
+            if resp.status_code == 200:
+                break
+            if resp.status_code in (502, 503, 504, 429) and attempt < 2:
+                time.sleep(3 * (attempt + 1))
+                continue
+        except requests.RequestException:
+            if attempt < 2:
+                time.sleep(3 * (attempt + 1))
+                continue
+            break
+
+    if resp is not None and resp.status_code == 200:
+        data_json = resp.json()
+        repo_data = data_json.get('data', {}).get('repository')
+        if repo_data and repo_data.get('defaultBranchRef'):
+            history = repo_data['defaultBranchRef']['target']['history']
+            return _loc_counter(owner, repo_name, data, cache_comment,
+                                history, addition_total, deletion_total, my_commits)
+        return addition_total, deletion_total, my_commits
+
+    status = resp.status_code if resp is not None else "timeout"
+    print(f'[today.py] Warning: recursive_loc({owner}/{repo_name}) returned status {status}. Preserving current count.')
     _force_close(data, cache_comment)
-    if resp.status_code == 403:
-        raise Exception('Rate limit hit!')
-    raise Exception(f'recursive_loc failed: {resp.status_code}')
+    return addition_total, deletion_total, my_commits
 
 
 def _loc_counter(owner, repo_name, data, cache_comment, history,
@@ -261,9 +291,13 @@ def _cache_builder(edges, comment_size, force_cache, loc_add=0, loc_del=0):
                 if int(commit_count) != total:
                     owner, repo_name = edge['node']['nameWithOwner'].split('/')
                     loc = recursive_loc(owner, repo_name, data, cache_comment)
-                    data[i] = f"{repo_hash} {total} {loc[2]} {loc[0]} {loc[1]}\n"
-            except TypeError:
-                data[i] = f"{repo_hash} 0 0 0 0\n"
+                    if isinstance(loc, (tuple, list)) and len(loc) >= 3:
+                        data[i] = f"{repo_hash} {total} {loc[2]} {loc[0]} {loc[1]}\n"
+                    else:
+                        data[i] = f"{repo_hash} {total} 0 0 0\n"
+            except Exception as e:
+                print(f"[today.py] Warning: Error calculating LOC for {edge['node']['nameWithOwner']}: {e}")
+                data[i] = f"{repo_hash} {commit_count} 0 0 0\n"
 
     with open(filename, 'w') as f:
         f.writelines(cache_comment)
