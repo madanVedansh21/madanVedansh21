@@ -150,7 +150,7 @@ def graph_repos_stars(count_type: str, owner_affiliation: list,
 # ── LOC pipeline (cache-based) ────────────────────────────────────────────────
 
 def recursive_loc(owner, repo_name, data, cache_comment,
-                  addition_total=0, deletion_total=0, my_commits=0, cursor=None):
+                  addition_total=0, deletion_total=0, my_commits=0, cursor=None, depth=0):
     query_count('recursive_loc')
     q = '''
     query($repo_name: String!, $owner: String!, $cursor: String) {
@@ -202,7 +202,7 @@ def recursive_loc(owner, repo_name, data, cache_comment,
         if repo_data and repo_data.get('defaultBranchRef'):
             history = repo_data['defaultBranchRef']['target']['history']
             return _loc_counter(owner, repo_name, data, cache_comment,
-                                history, addition_total, deletion_total, my_commits)
+                                history, addition_total, deletion_total, my_commits, depth=depth)
         return addition_total, deletion_total, my_commits
 
     status = resp.status_code if resp is not None else "timeout"
@@ -212,17 +212,17 @@ def recursive_loc(owner, repo_name, data, cache_comment,
 
 
 def _loc_counter(owner, repo_name, data, cache_comment, history,
-                 addition_total, deletion_total, my_commits):
+                 addition_total, deletion_total, my_commits, depth=0):
     for node in history['edges']:
         if node['node']['author']['user'] == OWNER_ID:
             my_commits    += 1
             addition_total += node['node']['additions']
             deletion_total += node['node']['deletions']
-    if not history['edges'] or not history['pageInfo']['hasNextPage']:
+    if not history['edges'] or not history['pageInfo']['hasNextPage'] or depth >= 10:
         return addition_total, deletion_total, my_commits
     return recursive_loc(owner, repo_name, data, cache_comment,
                          addition_total, deletion_total, my_commits,
-                         history['pageInfo']['endCursor'])
+                         history['pageInfo']['endCursor'], depth=depth + 1)
 
 
 def loc_query(owner_affiliation, comment_size=0, force_cache=False,
@@ -330,43 +330,28 @@ def _force_close(data, cache_comment):
 
 def commit_counter(comment_size: int) -> int:
     filename = 'cache/' + hashlib.sha256(USER_NAME.encode()).hexdigest() + '.txt'
-    with open(filename) as f:
-        data = f.readlines()
-    data = data[comment_size:]
-    return sum(int(line.split()[2]) for line in data)
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-# SVG patching (lxml — preserves all structure, base64 photo, CSS, etc.)
-# ─────────────────────────────────────────────────────────────────────────────
-
-# Register namespaces so lxml doesn't rewrite them as ns0/ns1
-# Namespace map for XPath queries
-_NS = {
-    'svg':   'http://www.w3.org/2000/svg',
-    'xlink': 'http://www.w3.org/1999/xlink',
-}
-
-import lxml.etree as _ET
-
-def _register_ns():
-    """Pre-register namespaces before any parse/write to avoid ns0: prefixes."""
     try:
-        _ET.register_namespace('', 'http://www.w3.org/2000/svg')
-        _ET.register_namespace('xlink', 'http://www.w3.org/1999/xlink')
-    except AttributeError:
-        pass  # older lxml versions don't expose this
+        with open(filename) as f:
+            data = f.readlines()
+    except FileNotFoundError:
+        return 0
+    data = data[comment_size:]
+    total = 0
+    for line in data:
+        parts = line.split()
+        if len(parts) >= 3 and parts[2].isdigit():
+            total += int(parts[2])
+    return total
 
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SVG patching (lxml)
+# ─────────────────────────────────────────────────────────────────────────────
 
 def _find_by_id(root, el_id: str):
-    # Try all common XPath patterns (works with or without namespace)
-    for expr in [
-        f".//*[@id='{el_id}']",
-        f".//{{{_NS['svg']}}}*[@id='{el_id}']",
-    ]:
-        el = root.find(expr)
-        if el is not None:
-            return el
+    matches = root.xpath(f"//*[@id='{el_id}']")
+    if matches:
+        return matches[0]
     return None
 
 
@@ -380,20 +365,20 @@ def svg_overwrite(filename: str, age_data, commit_data, star_data,
                   repo_data, contrib_data, follower_data, loc_data):
     """
     Parse an SVG, update stat tspan ids, write back.
-    Preserves ALL other content (CSS, base64 photo, animation, xml:space, etc.)
+    Preserves all styling, structure, and text content.
     """
-    _register_ns()
-    parser = _ET.XMLParser(remove_blank_text=False, strip_cdata=False)
-    tree   = _ET.parse(filename, parser)
+    parser = etree.XMLParser(remove_blank_text=False, strip_cdata=False)
+    tree   = etree.parse(filename, parser)
     root   = tree.getroot()
 
     def update(el_id, new_text, dot_length=0):
         el = _find_by_id(root, el_id)
         if el is not None:
             el.text = str(new_text)
-        dots_el = _find_by_id(root, el_id + '_dots')
-        if dots_el is not None and dot_length:
-            dots_el.text = _dots_string(max(0, dot_length - len(str(new_text))))
+        if dot_length:
+            dots_el = _find_by_id(root, f"{el_id}_dots")
+            if dots_el is not None:
+                dots_el.text = _dots_string(max(0, dot_length - len(str(new_text))))
 
     # Format integers with commas
     def fmt(n):
@@ -411,8 +396,7 @@ def svg_overwrite(filename: str, age_data, commit_data, star_data,
     update('loc_add',       fmt(loc_data[0]))
     update('loc_del',       fmt(loc_data[1]), dot_length=7)
 
-    tree.write(filename, encoding='utf-8', xml_declaration=True,
-               pretty_print=False)
+    tree.write(filename, encoding='utf-8', xml_declaration=True, pretty_print=False)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -429,7 +413,8 @@ if __name__ == '__main__':
     age_str, t = perf_counter(daily_readme, BIRTHDAY)
     formatter('age calculation', t)
 
-    total_loc, t = perf_counter(loc_query, ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'], 7)
+    # Use OWNER and COLLABORATOR to scan user's repositories quickly (seconds, not 18 minutes!)
+    total_loc, t = perf_counter(loc_query, ['OWNER', 'COLLABORATOR'], 7)
     label = 'LOC (cached)' if total_loc[-1] else 'LOC (no cache)'
     formatter(label, t)
 
