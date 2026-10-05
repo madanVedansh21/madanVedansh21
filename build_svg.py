@@ -140,12 +140,8 @@ def build_info_col(theme, rx, start_y):
        f'<tspan {vc}>Full-Stack Dev · MERN · AI</tspan>')
 
     ln(f'<tspan {cc}>. </tspan><tspan {kc}>Work</tspan>'
-       f'<tspan {cc}> ................. </tspan>'
-       f'<tspan {vc}>Ex-Full Stack Intern @ QuickIntell</tspan>')
-
-    ln(f'<tspan {cc}>. </tspan><tspan {kc}>IDE</tspan>'
-       f'<tspan {cc}> .................. </tspan>'
-       f'<tspan {vc}>VS Code · Cursor</tspan>')
+       f'<tspan {cc}> ......... </tspan>'
+       f'<tspan {vc}>Ex-Full Stack Dev Intern @ QuickIntell</tspan>')
 
     blank()
 
