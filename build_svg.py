@@ -22,14 +22,14 @@ DARK_OUT   = ROOT / "dark_mode.svg"
 LIGHT_OUT  = ROOT / "light_mode.svg"
 
 # ── Typography ────────────────────────────────────────────────────────────────
-FONT_SIZE   = 12      # px
-LINE_HEIGHT = 15      # px
+FONT_SIZE   = 14      # px (larger, clearer)
+LINE_HEIGHT = 18      # px (spacious, crisp)
 CHAR_WIDTH  = FONT_SIZE * 0.601   # Consolas monospace ratio
 
 # ── Layout ────────────────────────────────────────────────────────────────────
-PAD_X       = 15      # left padding for ASCII block
-PAD_Y       = 25      # top of first line (y of first tspan)
-COL_GAP     = 20      # gap between ASCII block right edge and info panel
+PAD_X       = 18      # left padding for ASCII block
+PAD_Y       = 28      # top of first line (y of first tspan)
+COL_GAP     = 25      # gap between ASCII block right edge and info panel
 
 # ── Themes ───────────────────────────────────────────────────────────────────
 THEMES = {
@@ -42,7 +42,7 @@ THEMES = {
         "del":    "#f85149",
         "cc":     "#616e7f",
         "header": "#58a6ff",
-        "ascii":  "#8b949e",
+        "ascii":  "#c9d1d9",   # high-contrast bright white/gray (crystal clear)
     },
     "light": {
         "bg":     "#f6f8fa",
@@ -53,7 +53,7 @@ THEMES = {
         "del":    "#82071e",
         "cc":     "#8c959f",
         "header": "#0969da",
-        "ascii":  "#57606a",
+        "ascii":  "#24292f",   # high-contrast dark charcoal (crystal clear)
     },
 }
 
@@ -63,13 +63,21 @@ def load_ascii():
         lines = f.read().splitlines()
     while lines and not lines[-1].strip():
         lines.pop()
-    return lines
+    # Crop excessive empty outer @ padding (cols 9 to 67 = 58 columns)
+    # This brings the portrait into full focus, making it much larger and clearer!
+    cropped = []
+    for line in lines:
+        if len(line) >= 67:
+            cropped.append(line[9:67])
+        else:
+            cropped.append(line)
+    return cropped
 
 
 def build_ascii_col(lines, theme, x, y):
     """SVG markup for the static ASCII left column."""
     parts = [
-        f'<text font-family="\'Courier New\',Courier,monospace" '
+        f'<text font-family="ConsolasFallback,Consolas,\'Courier New\',monospace" '
         f'font-size="{FONT_SIZE}px" fill="{theme["ascii"]}" '
         f'xml:space="preserve">'
     ]
@@ -98,7 +106,7 @@ def build_info_col(theme, rx, start_y):
 
     LH = LINE_HEIGHT   # line height alias
     y  = start_y
-    out = [f'<text font-family="\'Courier New\',Courier,monospace" font-size="{FONT_SIZE}px" xml:space="preserve">']
+    out = [f'<text font-family="ConsolasFallback,Consolas,\'Courier New\',monospace" font-size="{FONT_SIZE}px" xml:space="preserve">']
 
     def ln(markup):
         nonlocal y
@@ -234,19 +242,21 @@ def build_svg(theme_name, lines):
     asc_h  = rows * LINE_HEIGHT              # pixel height of ASCII block
 
     right_x = PAD_X + asc_w + COL_GAP       # x start of info panel
-    right_w = 430                            # fixed width for info panel
+    right_w = 460                            # fixed width for info panel
     svg_w   = right_x + right_w + PAD_X     # total SVG width
-    svg_h   = max(asc_h + PAD_Y + 15, 520)  # at least 520px tall
+    svg_h   = max(asc_h + PAD_Y + 20, 560)  # at least 560px tall
 
     ascii_svg = build_ascii_col(lines, theme, PAD_X, PAD_Y)
     info_svg, info_bottom = build_info_col(theme, right_x, PAD_Y)
 
-    svg_h = max(svg_h, info_bottom + 15)
+    svg_h = max(svg_h, info_bottom + 20)
 
     return f"""<?xml version='1.0' encoding='UTF-8'?>
 <svg xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink"
-     width="{svg_w}px" height="{svg_h}px">
+     font-family="ConsolasFallback,Consolas,monospace"
+     width="{svg_w}px" height="{svg_h}px"
+     font-size="{FONT_SIZE}px">
 <style>
 @font-face {{
   src: local('Consolas'), local('Consolas Bold');
