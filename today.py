@@ -307,15 +307,13 @@ def commit_counter(comment_size: int) -> int:
 # ─────────────────────────────────────────────────────────────────────────────
 
 # Register namespaces so lxml doesn't rewrite them as ns0/ns1
-etree.register_namespace = getattr(etree, 'register_namespace', lambda *a: None)
+# Namespace map for XPath queries
 _NS = {
     'svg':   'http://www.w3.org/2000/svg',
     'xlink': 'http://www.w3.org/1999/xlink',
 }
 
-# Teach lxml to keep the existing namespace prefixes
 import lxml.etree as _ET
-_ET._Element.__repr__ = lambda self: f"<{self.tag}>"   # cosmetic only
 
 def _register_ns():
     """Pre-register namespaces before any parse/write to avoid ns0: prefixes."""
@@ -323,7 +321,7 @@ def _register_ns():
         _ET.register_namespace('', 'http://www.w3.org/2000/svg')
         _ET.register_namespace('xlink', 'http://www.w3.org/1999/xlink')
     except AttributeError:
-        pass  # older lxml — namespace declared inline in the SVG is fine
+        pass  # older lxml versions don't expose this
 
 
 def _find_by_id(root, el_id: str):
