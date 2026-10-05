@@ -367,7 +367,7 @@ def svg_overwrite(filename: str, age_data, commit_data, star_data,
             return f'{n:,}'
         return str(n)
 
-    update('age_data',      age_data,       dot_length=22)
+    update('age_data',      age_data)
     update('commit_data',   fmt(commit_data), dot_length=18)
     update('star_data',     fmt(star_data),  dot_length=14)
     update('repo_data',     fmt(repo_data),  dot_length=6)

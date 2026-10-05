@@ -133,7 +133,7 @@ def build_info_col(theme, rx, start_y):
 
     ln(f'<tspan {cc}>. </tspan><tspan {kc}>Work</tspan>'
        f'<tspan {cc}> ................. </tspan>'
-       f'<tspan {vc}>SWE Intern @ QuickIntell</tspan>')
+       f'<tspan {vc}>Full Stack Intern @ QuickIntell</tspan>')
 
     ln(f'<tspan {cc}>. </tspan><tspan {kc}>IDE</tspan>'
        f'<tspan {cc}> .................. </tspan>'
@@ -163,11 +163,11 @@ def build_info_col(theme, rx, start_y):
     # ── Interests ────────────────────────────────────────────────────────────
     ln(f'<tspan {cc}>. </tspan><tspan {kc}>Build</tspan>'
        f'<tspan {cc}> ................ </tspan>'
-       f'<tspan {vc}>Real-time, AI Agents</tspan>')
+       f'<tspan {vc}>Real-Time Systems, AI Agents</tspan>')
 
     ln(f'<tspan {cc}>. </tspan><tspan {kc}>Learn</tspan>'
        f'<tspan {cc}> ................ </tspan>'
-       f'<tspan {vc}>DSA, SysDesign, Blockchain</tspan>')
+       f'<tspan {vc}>DSA, System Design, Scalable Systems</tspan>')
 
     blank()
 

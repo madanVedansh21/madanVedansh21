@@ -1,6 +1,8 @@
 name: Update GitHub Stats
 
 on:
+  push:
+    branches: [main]       # run on every push to main
   schedule:
     - cron: "0 2 * * *"   # daily at 02:00 UTC (07:30 IST)
   workflow_dispatch:       # manual trigger from GitHub Actions tab

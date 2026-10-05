@@ -1,22 +1,50 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)"  srcset="dark_mode.svg">
-  <source media="(prefers-color-scheme: light)" srcset="light_mode.svg">
-  <img alt="Vedansh Madan's GitHub Profile Card" src="dark_mode.svg">
-</picture>
-
-<!-- ─── Tech badges ─────────────────────────────────────────────────────── -->
-
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=madanVedansh21&label=Profile+Views&color=blue&style=for-the-badge" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)"  srcset="dark_mode.svg">
+    <source media="(prefers-color-scheme: light)" srcset="light_mode.svg">
+    <img alt="Vedansh Madan's GitHub Profile Card" src="dark_mode.svg" width="100%">
+  </picture>
 </p>
 
+<!-- ─── Quick Connect & Links (Clickable) ────────────────────────────────── -->
+
 <p align="center">
+  <a href="https://www.linkedin.com/in/vedansh-madan/" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+  </a>
+  &nbsp;
+  <a href="mailto:vedanshmadan207@gmail.com">
+    <img src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
+  </a>
+  &nbsp;
+  <a href="https://github.com/madanVedansh21">
+    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+  </a>
+  &nbsp;
+  <img src="https://komarev.com/ghpvc/?username=madanVedansh21&label=Profile+Views&color=blue&style=for-the-badge" alt="Profile Views" />
+</p>
+
+---
+
+<!-- ─── Featured Projects ────────────────────────────────────────────────── -->
+
+### 🚀 Featured Projects
+
+- ⚔️ **[CodeCompete](https://github.com/madanVedansh21/code-compete)** — Real-time 1v1 competitive coding platform with WebSocket matchmaking, Redis queues, Monaco Editor, and rate-limited remote code execution (Piston API).
+- 🐝 **[BHive](https://github.com/madanVedansh21/BHive)** — Agentic AI social platform architected with multi-agent orchestration simulating 20+ autonomous agents with concurrency limits, cooldowns, and persistent memory.
+
+---
+
+<!-- ─── Tech Stack ───────────────────────────────────────────────────────── -->
+
+### 💻 Technologies & Tools
+
+<p align="left">
   <!-- Languages -->
   <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white" />
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
   <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
-  <img src="https://img.shields.io/badge/Solidity-363636?style=for-the-badge&logo=solidity&logoColor=white" />
   <!-- Frontend -->
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
   <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" />
@@ -33,25 +61,5 @@
   <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
   <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white" />
   <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" />
-</p>
-
----
-
-<!-- ─── Snake contribution graph ──────────────────────────────────────────── -->
-
-<picture>
-  <source media="(prefers-color-scheme: dark)"  srcset="https://raw.githubusercontent.com/MadanVedansh21/MadanVedansh21/output/github-snake-dark.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/MadanVedansh21/MadanVedansh21/output/github-snake.svg" />
-  <img alt="github contribution snake" src="https://raw.githubusercontent.com/MadanVedansh21/MadanVedansh21/output/github-snake.svg" />
-</picture>
-
-<!-- ─── Connect ───────────────────────────────────────────────────────────── -->
-
-<p align="center">
-  <a href="https://www.linkedin.com/in/vedansh-madan/" target="_blank">
-    <img src="https://raw.githubusercontent.com/gauravghongde/social-icons/master/SVG/Color/LinkedIN.svg" width="40"/>
-  </a>
-  <a href="mailto:vedanshmadan207@gmail.com">
-    <img src="https://raw.githubusercontent.com/gauravghongde/social-icons/master/SVG/Color/Gmail.svg" width="40"/>
-  </a>
+  <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" />
 </p>
